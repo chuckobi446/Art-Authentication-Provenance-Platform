@@ -1,40 +1,22 @@
-;; Art NFT Contract
+;; AI Authentication Contract (Mock)
 
-(define-non-fungible-token art-nft uint)
-
-(define-map artwork-data uint {
-    artist: principal,
-    title: (string-utf8 256),
-    description: (string-utf8 1024),
-    creation-date: uint,
-    image-url: (string-utf8 256),
-    is-physical: bool
+(define-map authentication-results uint {
+    is-authentic: bool,
+    confidence: uint,
+    timestamp: uint
 })
 
-(define-data-var artwork-counter uint u0)
-
-(define-public (mint-artwork (title (string-utf8 256)) (description (string-utf8 1024)) (creation-date uint) (image-url (string-utf8 256)) (is-physical bool))
+(define-public (authenticate-artwork (artwork-id uint) (image-url (string-utf8 256)))
     (let
-        ((artwork-id (+ (var-get artwork-counter) u1)))
-        (try! (nft-mint? art-nft artwork-id tx-sender))
-        (map-set artwork-data artwork-id {
-            artist: tx-sender,
-            title: title,
-            description: description,
-            creation-date: creation-date,
-            image-url: image-url,
-            is-physical: is-physical
+        ((is-authentic (> (len image-url) u10))  ;; Mock authentication logic
+         (confidence (if is-authentic u95 u5)))
+        (map-set authentication-results artwork-id {
+            is-authentic: is-authentic,
+            confidence: confidence,
+            timestamp: block-height
         })
-        (var-set artwork-counter artwork-id)
-        (ok artwork-id)))
+        (ok is-authentic)))
 
-(define-public (transfer-artwork (artwork-id uint) (recipient principal))
-    (try! (nft-transfer? art-nft artwork-id tx-sender recipient))
-    (ok true))
-
-(define-read-only (get-artwork-data (artwork-id uint))
-    (ok (unwrap! (map-get? artwork-data artwork-id) (err u404))))
-
-(define-read-only (get-artwork-owner (artwork-id uint))
-    (ok (nft-get-owner? art-nft artwork-id)))
+(define-read-only (get-authentication-result (artwork-id uint))
+    (ok (unwrap! (map-get? authentication-results artwork-id) (err u404))))
 

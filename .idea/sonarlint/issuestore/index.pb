@@ -5,3 +5,5 @@ P
  contracts/ai-authentication.clar,0/5/05713fa4533dc57e656a7646dd173c9e6e5057a3
 S
 #contracts/fractional-ownership.clar,8/0/80a8b47ee5247e9a178671b48d8d6d55306da6b0
+F
+contracts/art-nft.clar,b/8/b8408908036f986c88c52feb010257c7c6c04c15

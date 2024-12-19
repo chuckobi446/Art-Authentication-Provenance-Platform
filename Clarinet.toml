@@ -10,6 +10,11 @@ path = 'contracts/ai-authentication.clar'
 clarity_version = 2
 epoch = 2.5
 
+[contracts.art-nft]
+path = 'contracts/art-nft.clar'
+clarity_version = 2
+epoch = 2.5
+
 [contracts.fractional-ownership]
 path = 'contracts/fractional-ownership.clar'
 clarity_version = 2

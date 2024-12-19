@@ -1,0 +1,29 @@
+[project]
+name = 'Art-Authentication-Provenance-Platform'
+description = ''
+authors = []
+telemetry = true
+cache_dir = './.cache'
+requirements = []
+[contracts.ai-authentication]
+path = 'contracts/ai-authentication.clar'
+clarity_version = 2
+epoch = 2.5
+
+[contracts.art-nft]
+path = 'contracts/art-nft.clar'
+clarity_version = 2
+epoch = 2.5
+
+[contracts.fractional-ownership]
+path = 'contracts/fractional-ownership.clar'
+clarity_version = 2
+epoch = 2.5
+[repl.analysis]
+passes = ['check_checker']
+
+[repl.analysis.check_checker]
+strict = false
+trusted_sender = false
+trusted_caller = false
+callee_filter = false
